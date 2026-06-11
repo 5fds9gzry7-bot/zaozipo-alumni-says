@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 
 const items = [
   { href: "/", label: "首页", icon: "⌂" },
+  { href: "/articles", label: "经验", icon: "卷" },
   { href: "/alumni", label: "枣友", icon: "友" },
-  { href: "/me", label: "我的", icon: "篮" },
 ];
 
 export function BottomNav() {
