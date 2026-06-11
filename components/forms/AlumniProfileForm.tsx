@@ -1,18 +1,54 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { submitAlumniProfile } from "@/lib/supabase/actions";
+import { type FormEvent, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 import type { ActionResult, AlumniProfile } from "@/lib/supabase/types";
 import { CheckField, ResultMessage, TextAreaField, TextField } from "./FormControls";
 
 export function AlumniProfileForm({ initial }: { initial: AlumniProfile | null }) {
   const [result, setResult] = useState<ActionResult | null>(null);
-  const [pending, startTransition] = useTransition();
-  function submit(formData: FormData) {
-    startTransition(async () => setResult(await submitAlumniProfile(formData)));
+  const [pending, setPending] = useState(false);
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    setPending(true);
+    setResult(null);
+
+    try {
+      const supabase = createClient();
+      if (!supabase) {
+        setResult({ ok: false, message: "Supabase 环境变量未配置，暂时无法保存名片。" });
+        return;
+      }
+
+      const { data: auth, error: authError } = await supabase.auth.getUser();
+      if (authError) throw authError;
+      if (!auth.user) {
+        setResult({ ok: false, message: "登录状态已失效，请重新登录后再保存。" });
+        return;
+      }
+
+      const formData = new FormData(form);
+      const payload = alumniPayload(formData, auth.user.id);
+      const { data: existing, error: existingError } = await supabase.from("alumni_profiles").select("id").eq("user_id", auth.user.id).maybeSingle();
+      if (existingError) throw existingError;
+
+      const { error } = existing
+        ? await supabase.from("alumni_profiles").update(payload).eq("user_id", auth.user.id)
+        : await supabase.from("alumni_profiles").insert(payload);
+      if (error) throw error;
+
+      setResult({ ok: true, message: "枣友名片已保存并公开展示。" });
+    } catch (saveError) {
+      setResult({ ok: false, message: saveError instanceof Error ? saveError.message : "保存名片失败，请稍后重试。" });
+    } finally {
+      setPending(false);
+    }
   }
+
   return (
-    <form action={submit} className="space-y-6">
+    <form onSubmit={submit} className="space-y-6">
       <FormSection title="基本信息">
         <TextField label="昵称 / 姓名" name="display_name" required defaultValue={initial?.display_name} />
         <TextField label="毕业年份" name="graduation_year" type="number" required defaultValue={initial?.graduation_year} />
@@ -55,3 +91,43 @@ export function AlumniProfileForm({ initial }: { initial: AlumniProfile | null }
 function FormSection({ title, children }: { title: string; children: React.ReactNode }) {
   return <section className="rounded-[24px] border border-[#e7dbcf] bg-[#fffdf8] p-5 shadow-[0_8px_24px_rgba(76,47,37,0.05)]"><h2 className="mb-5 font-serif text-lg font-bold">{title}</h2><div className="space-y-5">{children}</div></section>;
 }
+
+function alumniPayload(formData: FormData, userId: string) {
+  return {
+    user_id: userId,
+    display_name: text(formData, "display_name"),
+    graduation_year: number(formData, "graduation_year"),
+    class_name: text(formData, "class_name"),
+    university: text(formData, "university"),
+    college: text(formData, "college"),
+    major: text(formData, "major"),
+    city: text(formData, "city"),
+    country: text(formData, "country") || "中国",
+    stage: text(formData, "stage"),
+    direction: text(formData, "direction"),
+    tags: tags(formData),
+    intro: text(formData, "intro"),
+    gaokao_year: nullableNumber(formData, "gaokao_year"),
+    gaokao_province: text(formData, "gaokao_province"),
+    gaokao_type: text(formData, "gaokao_type"),
+    gaokao_score: nullableNumber(formData, "gaokao_score"),
+    gaokao_rank: nullableNumber(formData, "gaokao_rank"),
+    show_score: formData.get("show_score") === "on",
+    show_rank: formData.get("show_rank") === "on",
+    admitted_university: text(formData, "admitted_university"),
+    admitted_major: text(formData, "admitted_major"),
+    study_advice: text(formData, "study_advice"),
+    exam_advice: text(formData, "exam_advice"),
+    application_advice: text(formData, "application_advice"),
+    major_advice: text(formData, "major_advice"),
+    message_to_students: text(formData, "message_to_students"),
+    contact: text(formData, "contact"),
+    show_contact: formData.get("show_contact") === "on",
+    status: "published",
+  };
+}
+
+function text(formData: FormData, name: string) { return String(formData.get(name) ?? "").trim(); }
+function number(formData: FormData, name: string) { return Number(text(formData, name)); }
+function nullableNumber(formData: FormData, name: string) { const value = text(formData, name); return value ? Number(value) : null; }
+function tags(formData: FormData) { return text(formData, "tags").split(/[,，]/).map((tag) => tag.trim()).filter(Boolean); }
