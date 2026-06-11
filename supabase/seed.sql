@@ -1,0 +1,5 @@
+-- 无审核版本不需要审核 seed。
+-- 先通过 /auth 注册用户，再通过 /apply 完善名片并通过 /submit-article 发布文章。
+-- 设置管理员：
+-- update public.profiles set role='super_admin', status='active'
+-- where email='jalex1049329707@gmail.com';

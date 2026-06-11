@@ -1,0 +1,646 @@
+⨯ Error: Invalid supabaseUrl: Must be a valid HTTP or HTTPS URL.
+    at proxy (proxy.ts:10:38)
+   8 |
+   9 |   let response = NextResponse.next({ request });
+> 10 |   const supabase = createServerClient(config.url, config.anonKey, {
+     |                                      ^
+  11 |     cookies: {
+  12 |       getAll() {
+  13 |         return request.cookies.getAll();
+⨯ Error: Invalid supabaseUrl: Must be a valid HTTP or HTTPS URL.
+    at proxy (proxy.ts:10:38)
+   8 |
+   9 |   let response = NextResponse.next({ request });
+> 10 |   const supabase = createServerClient(config.url, config.anonKey, {
+     |                                      ^
+  11 |     cookies: {
+  12 |       getAll() {
+  13 |         return request.cookies.getAll();
+⨯ Error: Invalid supabaseUrl: Must be a valid HTTP or HTTPS URL.
+    at proxy (proxy.ts:10:38)
+   8 |
+   9 |   let response = NextResponse.next({ request });
+> 10 |   const supabase = createServerClient(config.url, config.anonKey, {
+     |                                      ^
+  11 |     cookies: {
+  12 |       getAll() {
+  13 |         return request.cookies.getAll();
+⨯ Error: Invalid supabaseUrl: Must be a valid HTTP or HTTPS URL.
+    at proxy (proxy.ts:10:38)
+   8 |
+   9 |   let response = NextResponse.next({ request });
+> 10 |   const supabase = createServerClient(config.url, config.anonKey, {
+     |                                      ^
+  11 |     cookies: {
+  12 |       getAll() {
+  13 |         return request.cookies.getAll();
+⨯ Error: Invalid supabaseUrl: Must be a valid HTTP or HTTPS URL.
+    at proxy (proxy.ts:10:38)
+   8 |
+   9 |   let response = NextResponse.next({ request });
+> 10 |   const supabase = createServerClient(config.url, config.anonKey, {
+     |                                      ^
+  11 |     cookies: {
+  12 |       getAll() {
+  13 |         return request.cookies.getAll();
+⨯ Error: Invalid supabaseUrl: Must be a valid HTTP or HTTPS URL.
+    at proxy (proxy.ts:10:38)
+   8 |
+   9 |   let response = NextResponse.next({ request });
+> 10 |   const supabase = createServerClient(config.url, config.anonKey, {
+     |                                      ^
+  11 |     cookies: {
+  12 |       getAll() {
+  13 |         return request.cookies.getAll();
+⨯ Error: Invalid supabaseUrl: Must be a valid HTTP or HTTPS URL.
+    at proxy (proxy.ts:10:38)
+   8 |
+   9 |   let response = NextResponse.next({ request });
+> 10 |   const supabase = createServerClient(config.url, config.anonKey, {
+     |                                      ^
+  11 |     cookies: {
+  12 |       getAll() {
+  13 |         return request.cookies.getAll();
+⨯ Error: Invalid supabaseUrl: Must be a valid HTTP or HTTPS URL.
+    at proxy (proxy.ts:10:38)
+   8 |
+   9 |   let response = NextResponse.next({ request });
+> 10 |   const supabase = createServerClient(config.url, config.anonKey, {
+     |                                      ^
+  11 |     cookies: {
+  12 |       getAll() {
+  13 |         return request.cookies.getAll();
+⨯ Error: Invalid supabaseUrl: Must be a valid HTTP or HTTPS URL.
+    at proxy (proxy.ts:10:38)
+   8 |
+   9 |   let response = NextResponse.next({ request });
+> 10 |   const supabase = createServerClient(config.url, config.anonKey, {
+     |                                      ^
+  11 |     cookies: {
+  12 |       getAll() {
+  13 |         return request.cookies.getAll();
+[browser] Uncaught Error: Invalid supabaseUrl: Must be a valid HTTP or HTTPS URL.
+    at proxy (proxy.ts:10:38)
+   8 |
+   9 |   let response = NextResponse.next({ request });
+> 10 |   const supabase = createServerClient(config.url, config.anonKey, {
+     |                                      ^
+  11 |     cookies: {
+  12 |       getAll() {
+  13 |         return request.cookies.getAll();
+[browser] Uncaught Error: Invalid supabaseUrl: Must be a valid HTTP or HTTPS URL.
+    at proxy (proxy.ts:10:38)
+   8 |
+   9 |   let response = NextResponse.next({ request });
+> 10 |   const supabase = createServerClient(config.url, config.anonKey, {
+     |                                      ^
+  11 |     cookies: {
+  12 |       getAll() {
+  13 |         return request.cookies.getAll();
+⨯ Error: Invalid supabaseUrl: Must be a valid HTTP or HTTPS URL.
+    at proxy (proxy.ts:10:38)
+   8 |
+   9 |   let response = NextResponse.next({ request });
+> 10 |   const supabase = createServerClient(config.url, config.anonKey, {
+     |                                      ^
+  11 |     cookies: {
+  12 |       getAll() {
+  13 |         return request.cookies.getAll();
+[browser] Uncaught Error: Invalid supabaseUrl: Must be a valid HTTP or HTTPS URL.
+    at proxy (proxy.ts:10:38)
+   8 |
+   9 |   let response = NextResponse.next({ request });
+> 10 |   const supabase = createServerClient(config.url, config.anonKey, {
+     |                                      ^
+  11 |     cookies: {
+  12 |       getAll() {
+  13 |         return request.cookies.getAll();
+TypeError: fetch failed
+    at async signInWithEmail (lib\supabase\actions.ts:15:21)
+  13 |   const email = text(formData, "email");
+  14 |   const password = text(formData, "password");
+> 15 |   const { error } = await supabase.auth.signInWithPassword({ email, password });
+     |                     ^
+  16 |   return error ? { ok: false, message: error.message } : { ok: true, message: "登录成功，...
+  17 | }
+  18 | {
+  [cause]: Error: getaddrinfo ENOTFOUND xxxxxxxxxxxx.supabase.co
+      at ignore-listed frames {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'xxxxxxxxxxxx.supabase.co'
+  }
+}
+TypeError: fetch failed
+    at async signUpWithEmail (lib\supabase\actions.ts:25:21)
+  23 |   const password = text(formData, "password");
+  24 |   const displayName = text(formData, "displayName");
+> 25 |   const { error } = await supabase.auth.signUp({ email, password, options: { data: { displ...
+     |                     ^
+  26 |   return error ? { ok: false, message: error.message } : { ok: true, message: "注册成功。...
+  27 | }
+  28 | {
+  [cause]: Error: getaddrinfo ENOTFOUND xxxxxxxxxxxx.supabase.co
+      at ignore-listed frames {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'xxxxxxxxxxxx.supabase.co'
+  }
+}
+TypeError: fetch failed
+    at async signInWithEmail (lib\supabase\actions.ts:15:21)
+  13 |   const email = text(formData, "email");
+  14 |   const password = text(formData, "password");
+> 15 |   const { error } = await supabase.auth.signInWithPassword({ email, password });
+     |                     ^
+  16 |   return error ? { ok: false, message: error.message } : { ok: true, message: "登录成功，...
+  17 | }
+  18 | {
+  [cause]: Error: getaddrinfo ENOTFOUND xxxxxxxxxxxx.supabase.co
+      at ignore-listed frames {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'xxxxxxxxxxxx.supabase.co'
+  }
+}
+TypeError: fetch failed
+    at async signUpWithEmail (lib\supabase\actions.ts:25:21)
+  23 |   const password = text(formData, "password");
+  24 |   const displayName = text(formData, "displayName");
+> 25 |   const { error } = await supabase.auth.signUp({ email, password, options: { data: { displ...
+     |                     ^
+  26 |   return error ? { ok: false, message: error.message } : { ok: true, message: "注册成功。...
+  27 | }
+  28 | {
+  [cause]: Error: getaddrinfo ENOTFOUND xxxxxxxxxxxx.supabase.co
+      at ignore-listed frames {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'xxxxxxxxxxxx.supabase.co'
+  }
+}
+TypeError: fetch failed
+    at async signUpWithEmail (lib\supabase\actions.ts:25:21)
+  23 |   const password = text(formData, "password");
+  24 |   const displayName = text(formData, "displayName");
+> 25 |   const { error } = await supabase.auth.signUp({ email, password, options: { data: { displ...
+     |                     ^
+  26 |   return error ? { ok: false, message: error.message } : { ok: true, message: "注册成功。...
+  27 | }
+  28 | {
+  [cause]: Error: getaddrinfo ENOTFOUND xxxxxxxxxxxx.supabase.co
+      at ignore-listed frames {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'xxxxxxxxxxxx.supabase.co'
+  }
+}
+TypeError: fetch failed
+    at async signUpWithEmail (lib\supabase\actions.ts:25:21)
+  23 |   const password = text(formData, "password");
+  24 |   const displayName = text(formData, "displayName");
+> 25 |   const { error } = await supabase.auth.signUp({ email, password, options: { data: { displ...
+     |                     ^
+  26 |   return error ? { ok: false, message: error.message } : { ok: true, message: "注册成功。...
+  27 | }
+  28 | {
+  [cause]: Error: read ECONNRESET
+      at ignore-listed frames {
+    errno: -4077,
+    code: 'ECONNRESET',
+    syscall: 'read'
+  }
+}
+TypeError: fetch failed
+    at async signUpWithEmail (lib\supabase\actions.ts:25:21)
+  23 |   const password = text(formData, "password");
+  24 |   const displayName = text(formData, "displayName");
+> 25 |   const { error } = await supabase.auth.signUp({ email, password, options: { data: { displ...
+     |                     ^
+  26 |   return error ? { ok: false, message: error.message } : { ok: true, message: "注册成功。...
+  27 | }
+  28 | {
+  [cause]: Error: read ECONNRESET
+      at ignore-listed frames {
+    errno: -4077,
+    code: 'ECONNRESET',
+    syscall: 'read'
+  }
+}
+[browser] Uncaught Error: ./components/admin/AdminReviewCard.tsx:4:1
+Export adminApproveAlumniProfile doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminApproveAlumniProfile was not found in module [project]/lib/supabase/actions.ts [app-client] (ecmascript).
+Did you mean to import adminHideAlumniProfile?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx
+
+
+    at <unknown> (Error: ./components/admin/AdminReviewCard.tsx:4:1)
+    at <unknown> (Error: (./components/admin/AdminReviewCard.tsx:4:1)
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminApproveAlumniProfile doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminApproveAlumniProfile was not found in module [project]/lib/supabase/actions.ts [app-client] (ecmascript).
+Did you mean to import adminHideAlumniProfile?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminApproveAlumniProfile doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminApproveAlumniProfile was not found in module [project]/lib/supabase/actions.ts [app-ssr] (ecmascript).
+Did you mean to import adminHideAlumniProfile?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminApproveArticle doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminApproveArticle was not found in module [project]/lib/supabase/actions.ts [app-client] (ecmascript).
+Did you mean to import adminHideArticle?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminApproveArticle doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminApproveArticle was not found in module [project]/lib/supabase/actions.ts [app-ssr] (ecmascript).
+Did you mean to import adminHideArticle?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminRejectAlumniProfile doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminRejectAlumniProfile was not found in module [project]/lib/supabase/actions.ts [app-client] (ecmascript).
+Did you mean to import adminHideAlumniProfile?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminRejectAlumniProfile doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminRejectAlumniProfile was not found in module [project]/lib/supabase/actions.ts [app-ssr] (ecmascript).
+Did you mean to import adminHideAlumniProfile?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminRejectArticle doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminRejectArticle was not found in module [project]/lib/supabase/actions.ts [app-client] (ecmascript).
+Did you mean to import adminHideArticle?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminRejectArticle doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminRejectArticle was not found in module [project]/lib/supabase/actions.ts [app-ssr] (ecmascript).
+Did you mean to import adminHideArticle?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminApproveAlumniProfile doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminApproveAlumniProfile was not found in module [project]/lib/supabase/actions.ts [app-client] (ecmascript).
+Did you mean to import adminHideAlumniProfile?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminApproveAlumniProfile doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminApproveAlumniProfile was not found in module [project]/lib/supabase/actions.ts [app-ssr] (ecmascript).
+Did you mean to import adminHideAlumniProfile?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminApproveArticle doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminApproveArticle was not found in module [project]/lib/supabase/actions.ts [app-client] (ecmascript).
+Did you mean to import adminHideArticle?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminApproveArticle doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminApproveArticle was not found in module [project]/lib/supabase/actions.ts [app-ssr] (ecmascript).
+Did you mean to import adminHideArticle?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminRejectAlumniProfile doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminRejectAlumniProfile was not found in module [project]/lib/supabase/actions.ts [app-client] (ecmascript).
+Did you mean to import adminHideAlumniProfile?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminRejectAlumniProfile doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminRejectAlumniProfile was not found in module [project]/lib/supabase/actions.ts [app-ssr] (ecmascript).
+Did you mean to import adminHideAlumniProfile?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminRejectArticle doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminRejectArticle was not found in module [project]/lib/supabase/actions.ts [app-client] (ecmascript).
+Did you mean to import adminHideArticle?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 
+[browser] ./components/admin/AdminReviewCard.tsx:4:1
+Export adminRejectArticle doesn't exist in target module
+   2 |
+   3 | import { useState, useTransition } from "react";
+>  4 | import {
+     | ^^^^^^^
+>  5 |   adminApproveAlumniProfile, adminApproveArticle, adminRejectAlumniProfile,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  6 |   adminRejectArticle, adminResolveReport, adminHideAlumniProfile, adminHideArticle,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  7 | } from "@/lib/supabase/actions";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { ActionResult } from "@/lib/supabase/types";
+   9 |
+  10 | type Props = { kind: "alumni" | "article" | "report"; id: string; title: string; detail: s...
+
+The export adminRejectArticle was not found in module [project]/lib/supabase/actions.ts [app-ssr] (ecmascript).
+Did you mean to import adminHideArticle?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/AdminReviewCard.tsx
+    ./app/admin/page.tsx 

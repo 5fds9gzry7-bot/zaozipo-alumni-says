@@ -1,0 +1,3 @@
+-- 当前项目已切换为无审核机制。
+-- 请在 Supabase SQL Editor 完整执行同目录下的 no-review-reset.sql。
+-- 该文件仅保留为迁移提示，避免误执行旧审核 schema。

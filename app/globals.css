@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f8f4ec;
+  --ink: #34251f;
+}
+
+* { box-sizing: border-box; }
+html { background: #ebe5da; }
+body {
+  margin: 0;
+  background: #ebe5da;
+  color: var(--ink);
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+}
+button, input, textarea, select { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+.font-serif { font-family: "Songti SC", "STSong", "SimSun", serif; }
+.paper-texture {
+  background-image:
+    radial-gradient(circle at 15% 5%, rgba(123,45,38,.045) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 80% 35%, rgba(47,93,80,.035) 0 1px, transparent 1.5px);
+  background-size: 24px 24px, 31px 31px;
+}
+.brand-ring { box-shadow: inset 0 0 0 4px rgba(255,255,255,.14), 0 10px 24px rgba(76,35,31,.18); }
+.hero-hills::before, .hero-hills::after {
+  content: "";
+  position: absolute;
+  left: -15%;
+  width: 130%;
+  height: 130px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.13);
+}
+.hero-hills::before { bottom: -92px; }
+.hero-hills::after { bottom: -112px; left: -35%; }
+::selection { background: #ead1c6; color: #5c211e; }
