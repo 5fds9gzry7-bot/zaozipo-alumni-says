@@ -1,8 +1,13 @@
-import { createBrowserClient } from "@supabase/ssr";
+import { createClient as createSupabaseClient, type SupabaseClient } from "@supabase/supabase-js";
 import { getSupabaseConfig } from "./config";
 
-export function createSupabaseBrowserClient() {
+let browserClient: SupabaseClient | null = null;
+
+export function createClient() {
   const config = getSupabaseConfig();
   if (!config) return null;
-  return createBrowserClient(config.url, config.anonKey);
+  browserClient ??= createSupabaseClient(config.url, config.anonKey);
+  return browserClient;
 }
+
+export const createSupabaseBrowserClient = createClient;

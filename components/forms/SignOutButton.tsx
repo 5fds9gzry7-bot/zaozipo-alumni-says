@@ -1,11 +1,17 @@
 "use client";
 
-import { useTransition } from "react";
-import { useRouter } from "next/navigation";
-import { signOut } from "@/lib/supabase/actions";
+import { useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 export function SignOutButton() {
-  const [pending, startTransition] = useTransition();
-  const router = useRouter();
-  return <button onClick={() => startTransition(async () => { await signOut(); router.refresh(); })} disabled={pending} className="text-xs text-white/70">{pending ? "退出中..." : "退出登录"}</button>;
+  const [pending, setPending] = useState(false);
+
+  async function signOut() {
+    setPending(true);
+    const supabase = createClient();
+    if (supabase) await supabase.auth.signOut();
+    window.location.href = "/me";
+  }
+
+  return <button onClick={signOut} disabled={pending} className="text-xs text-white/70">{pending ? "退出中..." : "退出登录"}</button>;
 }
