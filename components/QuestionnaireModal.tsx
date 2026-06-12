@@ -22,7 +22,8 @@ export function QuestionnaireModal({ open, onClose }: { open: boolean; onClose: 
       {imageFailed ? <div className="mx-auto mt-5 flex h-[220px] w-[220px] items-center justify-center rounded-[22px] border border-[#eadfd3] bg-[#f8f3eb] p-6 shadow-sm"><p className="font-serif text-base leading-8 text-[#7b2d26]">问卷暂未开放，<br />请联系管理员。</p></div> : <div className="mx-auto mt-5 w-fit rounded-[22px] border border-[#eadfd3] bg-white p-3 shadow-sm"><Image src="/questionnaire-placeholder.png" alt="问卷星二维码" width={220} height={220} onError={() => setImageFailed(true)} className="h-[220px] w-[220px] rounded-[12px]" /></div>}
       <p className="mt-5 text-sm leading-7 text-[#6f5d53]">{imageFailed ? "问卷开放后，可在这里扫码填写校友信息与经验分享。" : "扫描二维码填写校友信息与经验分享，我们将在审核后发布。"}</p>
       <p className="mt-3 font-serif text-sm leading-7 text-[#7b2d26]">感谢分享你的经验，你的故事可能改变学弟学妹的人生。</p>
-      <button type="button" onClick={onClose} className="mt-6 w-full rounded-[16px] bg-[#31594e] px-4 py-3 text-sm font-semibold text-white">关闭</button>
+      <a href="https://form.wjx.com/vm/Y1EZN6J.aspx" target="_blank" rel="noreferrer" className="mt-6 block w-full rounded-[16px] bg-[#7b2d26] px-4 py-3 text-sm font-semibold text-white">打开问卷填写</a>
+      <button type="button" onClick={onClose} className="mt-3 w-full rounded-[16px] border border-[#d8c8b8] bg-[#fffdf8] px-4 py-3 text-sm font-semibold text-[#6f5d53]">关闭</button>
     </section>
   </div>;
 }
