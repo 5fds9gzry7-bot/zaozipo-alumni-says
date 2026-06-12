@@ -6,6 +6,7 @@ export type Article = {
   authorName: string;
   graduationYear: number;
   readTime: string;
+  submittedAt?: string;
   likeCount: number;
   favoriteCount: number;
   paragraphs: string[];

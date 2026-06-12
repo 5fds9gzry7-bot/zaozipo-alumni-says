@@ -17,6 +17,7 @@ export default async function AlumniDetailPage({ params }: { params: Promise<{ i
     </section>
     <DetailSection title="当前去向" eyebrow="NOW"><InfoRow label="大学 / 机构" value={person.university} /><InfoRow label="学院" value={person.college} /><InfoRow label="专业" value={person.major} /><InfoRow label="阶段" value={person.stage} /><InfoRow label="研究 / 职业方向" value={person.direction} /><InfoRow label="所在地区" value={[person.city, person.country].filter(Boolean).join(" · ")} /></DetailSection>
     {person.messageToStudents && <DetailSection title="个人简介" eyebrow="PROFILE"><p className="font-serif text-sm leading-8 text-[#59463d]">{person.messageToStudents}</p></DetailSection>}
+    {person.showContact && person.contact && <DetailSection title="公开联系方式" eyebrow="CONTACT"><InfoRow label="联系枣友" value={person.contact} /></DetailSection>}
     <section className="mt-6 rounded-[22px] border-l-4 border-[#c9a45c] bg-[#f2eadc] p-5 text-xs leading-6 text-[#786558]">本页内容来自校友问卷分享，经整理后公开展示。</section>
   </AppShell>;
 }

@@ -18,6 +18,8 @@ type AlumniRow = {
   tags: string[] | null;
   short_intro: string;
   bio: string | null;
+  contact: string | null;
+  show_contact: boolean | null;
 };
 
 type ArticleRow = {
@@ -98,6 +100,7 @@ function toArticle(row: ArticleRow): Article {
     authorName: row.alumni_profiles?.name ?? "枣友",
     graduationYear: row.alumni_profiles?.graduation_year ?? new Date(row.created_at).getFullYear(),
     readTime: `${Math.max(1, Math.ceil(row.content.length / 500))} 分钟`,
+    submittedAt: formatSubmittedAt(row.created_at),
     likeCount: 0,
     favoriteCount: 0,
     paragraphs: row.content.split(/\n\s*\n/).filter(Boolean),
@@ -133,7 +136,21 @@ function toAlumni(row: AlumniRow): Alumni {
     applicationAdvice: "",
     majorAdvice: "",
     messageToStudents: row.bio ?? "",
-    contact: "",
-    showContact: false,
+    contact: row.contact ?? "",
+    showContact: Boolean(row.show_contact && row.contact),
   };
+}
+
+function formatSubmittedAt(input: string) {
+  const date = new Date(input);
+  if (Number.isNaN(date.getTime())) return "";
+  return new Intl.DateTimeFormat("zh-CN", {
+    timeZone: "Asia/Shanghai",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(date);
 }

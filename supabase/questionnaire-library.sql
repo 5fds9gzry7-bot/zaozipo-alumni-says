@@ -33,6 +33,8 @@ create table public.alumni_profiles (
   admitted_major text not null default '',
   show_score boolean not null default false,
   show_rank boolean not null default false,
+  contact text not null default '',
+  show_contact boolean not null default false,
   published boolean not null default true,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),

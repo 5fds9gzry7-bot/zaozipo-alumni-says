@@ -133,6 +133,8 @@ async function parseQuestionnaireDocx(path) {
     admitted_major: answer(12),
     show_score: publicFields.includes("高考总分"),
     show_rank: publicFields.includes("全省排名"),
+    contact: answer(29).includes("允许公开") ? answer(28) : "",
+    show_contact: answer(29).includes("允许公开"),
     published: true,
   };
 

@@ -21,6 +21,8 @@ export type ImportProfile = {
   admitted_major: string;
   show_score: boolean;
   show_rank: boolean;
+  contact: string;
+  show_contact: boolean;
   published: boolean;
 };
 
@@ -33,6 +35,7 @@ export type ImportCandidate = {
     summary: string;
     content: string;
     published: boolean;
+    created_at?: string;
   } | null;
 };
 
@@ -92,6 +95,7 @@ export const questionnaireFieldMap = {
   contact: ["联系方式（平台+ID", "联系方式"],
   contact_public: ["联系方式是否允许公开展示", "联系方式公开"],
   article_public: ["是否公开", "公开"],
+  submitted_at: ["提交答卷时间"],
 } as const;
 
 export function previewQuestionnaireRows(rows: Record<string, unknown>[]): PreviewRow[] {
@@ -167,6 +171,8 @@ export function mapQuestionnaireRow(row: Record<string, unknown>, rowNumber = 0)
       admitted_major: value(row, questionnaireFieldMap.admitted_major),
       show_score: value(row, questionnaireFieldMap.show_fields).includes("高考总分"),
       show_rank: value(row, questionnaireFieldMap.show_fields).includes("全省排名"),
+      contact: isPublicContact(value(row, questionnaireFieldMap.contact_public)) ? contact : "",
+      show_contact: isPublicContact(value(row, questionnaireFieldMap.contact_public)),
       published: true,
     },
     article: articleTitle && articleContent ? {
@@ -175,6 +181,7 @@ export function mapQuestionnaireRow(row: Record<string, unknown>, rowNumber = 0)
       summary: summary || generateSummary(articleContent),
       content: articleContent,
       published: booleanValue(value(row, questionnaireFieldMap.article_public), true),
+      created_at: questionnaireDate(value(row, questionnaireFieldMap.submitted_at)),
     } : null,
   };
 }
@@ -231,4 +238,11 @@ function booleanValue(input: string, defaultValue = false) {
 
 function isPublicContact(input: string) {
   return input.includes("允许公开");
+}
+
+function questionnaireDate(input: string) {
+  const match = input.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})\s+(\d{1,2}):(\d{2})/);
+  if (!match) return undefined;
+  const [, month, day, year, hour, minute] = match;
+  return new Date(`${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}T${hour.padStart(2, "0")}:${minute}:00+08:00`).toISOString();
 }

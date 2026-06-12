@@ -45,6 +45,8 @@ EDGEONE_VERSION=v1.1
 
 `questionnaire-library-final.sql` 会重建 `public` schema，正式执行前请备份已有数据。
 
+已有数据库只需执行 `supabase/add-public-contact-fields.sql`，即可增加按问卷授权展示的公开联系方式字段。
+
 ## 更换问卷二维码
 
 替换：

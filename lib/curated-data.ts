@@ -101,10 +101,11 @@ export const curatedArticles: Article[] = [
     id: "jalex-system-test",
     title: "选择＞努力",
     excerpt: "高考前后仿佛是两段截然不同的人生。所谓自由，不是拥有所有选择，而是有勇气选择真正适合自己的路。",
-    category: "职业发展",
+    category: "留学申请",
     authorName: "Jalex",
     graduationYear: 2024,
     readTime: "2 分钟",
+    submittedAt: "2026/6/12 11:47",
     likeCount: 0,
     favoriteCount: 0,
     paragraphs: [
@@ -127,6 +128,7 @@ export const curatedArticles: Article[] = [
     authorName: "心远",
     graduationYear: 2024,
     readTime: "1 分钟",
+    submittedAt: "2026/6/12 13:55",
     likeCount: 0,
     favoriteCount: 0,
     paragraphs: [
@@ -144,6 +146,7 @@ export const curatedArticles: Article[] = [
     authorName: "只喝一點點",
     graduationYear: 2024,
     readTime: "1 分钟",
+    submittedAt: "2026/6/12 15:50",
     likeCount: 0,
     favoriteCount: 0,
     paragraphs: [
