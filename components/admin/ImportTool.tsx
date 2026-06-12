@@ -39,13 +39,13 @@ export function ImportTool() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "preview", secret, filename: file.name, operator, candidates, totalRows: rows.length, skippedInvalid: rows.filter((row) => !row.candidate).length }),
       });
-      const payload = await response.json() as { duplicateRows?: number[]; error?: string };
+      const payload = await response.json() as { updateRows?: number[]; error?: string };
       if (!response.ok) throw new Error(payload.error || "重复检测失败。");
-      const duplicates = new Set(payload.duplicateRows ?? []);
+      const updates = new Set(payload.updateRows ?? []);
       setPreview({
         filename: file.name,
         candidates,
-        rows: rows.map((row) => duplicates.has(row.rowNumber) ? { ...row, status: "重复" } : row),
+        rows: rows.map((row) => updates.has(row.rowNumber) ? { ...row, status: "更新" } : row),
       });
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "无法读取文件，请确认它是有效的 .xlsx 或 .csv 文件。");
@@ -88,9 +88,9 @@ export function ImportTool() {
 
   const totals = preview ? {
     total: preview.rows.length,
-    alumni: preview.rows.filter((row) => row.status === "新增").length,
-    articles: preview.rows.filter((row) => row.status === "新增" && row.candidate?.article).length,
-    duplicates: preview.rows.filter((row) => row.status === "重复").length,
+    alumni: preview.rows.filter((row) => row.status === "新增" || row.status === "更新").length,
+    articles: preview.rows.filter((row) => (row.status === "新增" || row.status === "更新") && row.candidate?.article).length,
+    duplicates: preview.rows.filter((row) => row.status === "更新").length,
     invalid: preview.rows.filter((row) => row.status === "缺少关键信息").length,
   } : null;
 
@@ -111,7 +111,7 @@ export function ImportTool() {
       </label>
     </section>}
 
-    {preview && totals && <><section className="grid grid-cols-3 gap-3"><Metric label="总行数" value={totals.total} /><Metric label="可导入枣友" value={totals.alumni} /><Metric label="可导入文章" value={totals.articles} /><Metric label="重复枣友" value={totals.duplicates} /><Metric label="缺失信息" value={totals.invalid} /><Metric label="将跳过" value={totals.duplicates + totals.invalid} /></section>
+    {preview && totals && <><section className="grid grid-cols-3 gap-3"><Metric label="总行数" value={totals.total} /><Metric label="可写入枣友" value={totals.alumni} /><Metric label="可写入文章" value={totals.articles} /><Metric label="更新枣友" value={totals.duplicates} /><Metric label="缺失信息" value={totals.invalid} /><Metric label="将跳过" value={totals.invalid} /></section>
       <section className="rounded-[24px] border border-[#e7dbcf] bg-[#fffdf8] p-4 shadow-sm"><p className="mb-3 text-[10px] font-semibold tracking-[0.18em] text-[#a08255]">STEP 3 · PREVIEW</p><div className="overflow-x-auto"><table className="min-w-[820px] text-left text-xs"><thead className="text-[#806f65]"><tr>{["姓名", "毕业年份", "大学", "专业", "城市", "文章标题", "分类", "状态"].map((item) => <th key={item} className="border-b border-[#e8ddd2] px-3 py-3 font-semibold">{item}</th>)}</tr></thead><tbody>{preview.rows.map((row) => <tr key={row.rowNumber} className="border-b border-[#f0e7dd]"><td className="px-3 py-3 font-semibold">{row.name || "-"}</td><td className="px-3 py-3">{row.graduationYear ?? "-"}</td><td className="px-3 py-3">{row.university || "-"}</td><td className="px-3 py-3">{row.major || "-"}</td><td className="px-3 py-3">{row.city || "-"}</td><td className="px-3 py-3">{row.articleTitle || "仅名片"}</td><td className="px-3 py-3">{row.category || "-"}</td><td className="px-3 py-3"><Status value={row.status} detail={row.detail} /></td></tr>)}</tbody></table></div><button type="button" disabled={pending || totals.alumni === 0} onClick={() => void importRows()} className="mt-5 w-full rounded-[16px] bg-[#7b2d26] px-4 py-3.5 text-sm font-semibold text-white disabled:opacity-60">确认导入并更新网站</button></section>
     </>}
 
@@ -122,7 +122,7 @@ export function ImportTool() {
 
 const inputClass = "w-full rounded-[16px] border border-[#e8ddd2] bg-[#f8f3eb] px-4 py-3 text-sm outline-none focus:border-[#a96d61]";
 function Metric({ label, value }: { label: string; value: number }) { return <div className="rounded-[18px] border border-[#e7dbcf] bg-[#fffdf8] px-2 py-4 text-center shadow-sm"><p className="font-serif text-2xl font-bold">{value}</p><p className="mt-1 text-[10px] text-[#8c7b71]">{label}</p></div>; }
-function Status({ value, detail }: { value: PreviewRow["status"]; detail: PreviewRow["detail"] }) { const color = value === "新增" ? "text-[#31594e]" : value === "重复" ? "text-[#a08255]" : "text-[#7b2d26]"; return <span className={`font-semibold ${color}`}>{value}<span className="mt-1 block whitespace-nowrap text-[9px] font-normal text-[#9b8a80]">{detail}</span></span>; }
+function Status({ value, detail }: { value: PreviewRow["status"]; detail: PreviewRow["detail"] }) { const color = value === "新增" ? "text-[#31594e]" : value === "更新" ? "text-[#a08255]" : "text-[#7b2d26]"; return <span className={`font-semibold ${color}`}>{value}<span className="mt-1 block whitespace-nowrap text-[9px] font-normal text-[#9b8a80]">{detail}</span></span>; }
 
 function recordsFromRows(rows: unknown[][]) {
   const [headerRow = [], ...dataRows] = rows;

@@ -36,7 +36,7 @@ export type ImportCandidate = {
   } | null;
 };
 
-export type PreviewStatus = "新增" | "重复" | "缺少关键信息";
+export type PreviewStatus = "新增" | "更新" | "缺少关键信息";
 export type PreviewRow = {
   rowNumber: number;
   candidate: ImportCandidate | null;
@@ -62,32 +62,35 @@ export type ImportResult = {
 };
 
 export const questionnaireFieldMap = {
-  name: ["姓名 / 昵称", "姓名/昵称", "昵称 / 姓名", "昵称/姓名", "姓名", "昵称"],
-  graduation_year: ["毕业年份", "毕业年级", "届别"],
-  class_name: ["当年班级", "班级（可选）", "班级(可选)", "班级"],
-  university: ["当前大学 / 机构", "当前大学/机构", "当前大学", "大学", "机构"],
-  school: ["学院", "院系"],
-  major: ["当前专业", "专业"],
-  city: ["所在城市", "城市"],
-  country: ["国家 / 地区", "国家/地区", "国家", "地区"],
-  education_level: ["学历阶段", "学历 / 职业阶段", "学历/职业阶段"],
-  research_direction: ["研究 / 职业方向", "研究/职业方向", "职业方向", "研究方向"],
-  tags: ["标签（逗号分隔）", "标签(逗号分隔)", "标签"],
-  short_intro: ["一句话介绍", "简短介绍"],
+  name: ["您的姓名（网名也可）是", "姓名 / 昵称", "姓名/昵称", "昵称 / 姓名", "昵称/姓名", "姓名", "昵称"],
+  graduation_year: ["您的毕业年份是", "毕业年份", "毕业年级", "届别"],
+  class_name: ["您高中所在班级是", "当年班级", "班级（可选）", "班级(可选)", "班级"],
+  university: ["您当前所在大学或机构是", "当前大学 / 机构", "当前大学/机构", "当前大学", "大学", "机构"],
+  school: ["您所在学院是", "学院", "院系"],
+  major: ["您当前所学专业是", "当前专业", "专业"],
+  city: ["您目前所在城市是", "所在城市", "城市"],
+  country: ["您所在国家或地区是", "国家 / 地区", "国家/地区", "国家", "地区"],
+  education_level: ["您当前所处阶段是", "学历阶段", "学历 / 职业阶段", "学历/职业阶段"],
+  research_direction: ["您的研究方向或职业方向是", "研究 / 职业方向", "研究/职业方向", "职业方向", "研究方向"],
+  tags: ["您认为哪些标签适合自己", "标签（逗号分隔）", "标签(逗号分隔)", "标签"],
+  short_intro: ["请用一句话介绍自己", "一句话介绍", "简短介绍"],
   bio: ["个人简介", "简介"],
-  gaokao_year: ["高考年份"],
-  gaokao_province: ["高考省份"],
-  gaokao_type: ["高考科类", "科类"],
-  gaokao_score: ["高考总分", "高考分数"],
-  gaokao_rank: ["省排名", "位次"],
-  admitted_university: ["录取大学"],
-  admitted_major: ["录取专业"],
-  show_score: ["是否公开高考分数"],
-  show_rank: ["是否公开省排名"],
-  article_title: ["文章标题", "经验标题"],
-  article_category: ["分类", "文章分类"],
+  gaokao_year: ["您的高考年份是", "高考年份"],
+  gaokao_province: ["您所在省份是", "高考省份"],
+  gaokao_type: ["您当时的选科组合是", "高考科类", "科类"],
+  gaokao_score: ["您的高考总分是", "高考总分", "高考分数"],
+  gaokao_rank: ["您的全省排名是", "省排名", "位次"],
+  admitted_university: ["您当年录取就读的大学是", "录取大学"],
+  admitted_major: ["您当年录取就读的专业是", "录取专业"],
+  show_fields: ["您是否同意公开展示以下信息", "公开展示信息"],
+  article_title: ["请填写本次经验分享的标题", "文章标题", "经验标题"],
+  article_category: ["本次经验分享属于哪个类别", "分类", "文章分类"],
   article_summary: ["文章摘要", "摘要"],
-  article_content: ["正文内容", "正文", "经验分享"],
+  article_content: ["请详细分享您的经验、故事或建议", "正文内容", "正文", "经验分享"],
+  message: ["如果用一句话概括，您最想告诉学弟学妹什么", "最想告诉学弟学妹"],
+  retrospective: ["如果重新回到高三，您最想改变或提前知道的一件事是什么", "如果重新回到高三"],
+  contact: ["联系方式（平台+ID", "联系方式"],
+  contact_public: ["联系方式是否允许公开展示", "联系方式公开"],
   article_public: ["是否公开", "公开"],
 } as const;
 
@@ -127,7 +130,16 @@ export function mapQuestionnaireRow(row: Record<string, unknown>, rowNumber = 0)
   if (!name || graduationYear === null || !university || !major) return null;
 
   const articleTitle = value(row, questionnaireFieldMap.article_title);
-  const articleContent = value(row, questionnaireFieldMap.article_content);
+  const articleBody = value(row, questionnaireFieldMap.article_content);
+  const message = value(row, questionnaireFieldMap.message);
+  const retrospective = value(row, questionnaireFieldMap.retrospective);
+  const contact = value(row, questionnaireFieldMap.contact);
+  const articleContent = [
+    articleBody,
+    message && `最想告诉学弟学妹：${message}`,
+    retrospective && `如果重新回到高三：${retrospective}`,
+    isPublicContact(value(row, questionnaireFieldMap.contact_public)) && contact && `联系方式：${contact}`,
+  ].filter(Boolean).join("\n\n");
   const summary = value(row, questionnaireFieldMap.article_summary);
 
   return {
@@ -141,7 +153,7 @@ export function mapQuestionnaireRow(row: Record<string, unknown>, rowNumber = 0)
       major,
       city: value(row, questionnaireFieldMap.city),
       country: value(row, questionnaireFieldMap.country) || "中国",
-      education_level: value(row, questionnaireFieldMap.education_level),
+      education_level: stripChoice(value(row, questionnaireFieldMap.education_level)),
       research_direction: value(row, questionnaireFieldMap.research_direction),
       tags: splitTags(value(row, questionnaireFieldMap.tags)),
       short_intro: value(row, questionnaireFieldMap.short_intro),
@@ -153,13 +165,13 @@ export function mapQuestionnaireRow(row: Record<string, unknown>, rowNumber = 0)
       gaokao_rank: nullableNumber(value(row, questionnaireFieldMap.gaokao_rank)),
       admitted_university: value(row, questionnaireFieldMap.admitted_university),
       admitted_major: value(row, questionnaireFieldMap.admitted_major),
-      show_score: booleanValue(value(row, questionnaireFieldMap.show_score)),
-      show_rank: booleanValue(value(row, questionnaireFieldMap.show_rank)),
+      show_score: value(row, questionnaireFieldMap.show_fields).includes("高考总分"),
+      show_rank: value(row, questionnaireFieldMap.show_fields).includes("全省排名"),
       published: true,
     },
     article: articleTitle && articleContent ? {
       title: articleTitle,
-      category: value(row, questionnaireFieldMap.article_category) || "大学生活",
+      category: stripChoice(value(row, questionnaireFieldMap.article_category)) || "大学生活",
       summary: summary || generateSummary(articleContent),
       content: articleContent,
       published: booleanValue(value(row, questionnaireFieldMap.article_public), true),
@@ -179,10 +191,22 @@ export function generateSummary(content: string) {
 
 function value(row: Record<string, unknown>, aliases: readonly string[]) {
   for (const alias of aliases) {
-    const found = row[alias];
-    if (found !== undefined && found !== null && String(found).trim()) return String(found).trim();
+    const normalizedAlias = normalizeHeader(alias);
+    for (const [key, found] of Object.entries(row)) {
+      if (normalizeHeader(key).includes(normalizedAlias) && found !== undefined && found !== null && String(found).trim()) {
+        return String(found).trim();
+      }
+    }
   }
   return "";
+}
+
+function normalizeHeader(input: string) {
+  return input.replace(/^\s*\d+\.\s*/, "").replace(/[\s*（）()：:？?]/g, "").trim();
+}
+
+function stripChoice(input: string) {
+  return input.replace(/^[A-Z]\.\s*/, "").trim();
 }
 
 function splitTags(input: string) {
@@ -203,4 +227,8 @@ function booleanValue(input: string, defaultValue = false) {
   if (["是", "公开", "yes", "true", "1"].includes(normalized)) return true;
   if (["否", "不公开", "no", "false", "0"].includes(normalized)) return false;
   return defaultValue;
+}
+
+function isPublicContact(input: string) {
+  return input.includes("允许公开");
 }

@@ -28,37 +28,46 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Supabase 服务端环境变量未配置完整。" }, { status: 503 });
   }
 
-  const { data: existing, error: existingError } = await supabase.from("alumni_profiles").select("name, graduation_year, university");
+  const { data: existing, error: existingError } = await supabase.from("alumni_profiles").select("id, name, graduation_year, university");
   if (existingError) return NextResponse.json({ error: existingError.message }, { status: 500 });
 
-  const existingKeys = new Set((existing ?? []).map((item) => duplicateKey(item)));
+  const existingByKey = new Map((existing ?? []).map((item) => [duplicateKey(item), item.id]));
   const seen = new Set<string>();
-  const duplicateRows: number[] = [];
+  const updateRows: number[] = [];
   const importable = body.candidates.filter((candidate) => {
     const key = duplicateKey(candidate.profile);
-    if (existingKeys.has(key) || seen.has(key)) {
-      duplicateRows.push(candidate.rowNumber);
+    if (seen.has(key)) {
       return false;
     }
+    if (existingByKey.has(key)) updateRows.push(candidate.rowNumber);
     seen.add(key);
     return true;
   });
 
   if (body.action === "preview") {
-    return NextResponse.json({ duplicateRows, importableRows: importable.map((item) => item.rowNumber) });
+    return NextResponse.json({ updateRows, importableRows: importable.map((item) => item.rowNumber) });
   }
 
   let insertedAlumni = 0;
   let insertedArticles = 0;
   for (const candidate of importable) {
-    const { data: alumni, error: alumniError } = await supabase.from("alumni_profiles").insert(candidate.profile).select("id").single();
+    const key = duplicateKey(candidate.profile);
+    const existingId = existingByKey.get(key);
+    const alumniRequest = existingId
+      ? supabase.from("alumni_profiles").update(candidate.profile).eq("id", existingId).select("id").single()
+      : supabase.from("alumni_profiles").insert(candidate.profile).select("id").single();
+    const { data: alumni, error: alumniError } = await alumniRequest;
     if (alumniError) return NextResponse.json({ error: `第 ${candidate.rowNumber} 行枣友导入失败：${alumniError.message}` }, { status: 500 });
-    insertedAlumni += 1;
+    if (!existingId) insertedAlumni += 1;
 
     if (candidate.article) {
-      const { error: articleError } = await supabase.from("articles").insert({ ...candidate.article, alumni_id: alumni.id });
+      const { data: currentArticle } = await supabase.from("articles").select("id").eq("alumni_id", alumni.id).order("created_at", { ascending: false }).limit(1).maybeSingle();
+      const articleRequest = currentArticle
+        ? supabase.from("articles").update(candidate.article).eq("id", currentArticle.id)
+        : supabase.from("articles").insert({ ...candidate.article, alumni_id: alumni.id });
+      const { error: articleError } = await articleRequest;
       if (articleError) return NextResponse.json({ error: `第 ${candidate.rowNumber} 行文章导入失败：${articleError.message}` }, { status: 500 });
-      insertedArticles += 1;
+      if (!currentArticle) insertedArticles += 1;
     }
   }
 
@@ -67,7 +76,7 @@ export async function POST(request: Request) {
     totalRows: body.totalRows,
     insertedAlumni,
     insertedArticles,
-    skippedDuplicates: duplicateRows.length,
+    skippedDuplicates: 0,
     skippedInvalid: body.skippedInvalid,
     filename: body.filename,
     importedAt,
@@ -76,7 +85,7 @@ export async function POST(request: Request) {
     filename: body.filename,
     total_profiles: insertedAlumni,
     total_articles: insertedArticles,
-    skipped_duplicates: duplicateRows.length,
+    skipped_duplicates: 0,
     skipped_invalid: body.skippedInvalid,
     imported_at: importedAt,
     operator: body.operator || "管理员",
