@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { curatedAlumni, curatedArticles } from "@/lib/curated-data";
 import { alumni as mockAlumni, articles as mockArticles, type Alumni, type Article } from "@/lib/mock-data";
 import { getSupabaseConfig } from "./config";
 
@@ -40,15 +41,17 @@ function getPublicClient() {
 
 export async function getPublishedArticles(limit?: number): Promise<Article[]> {
   const supabase = getPublicClient();
-  if (!supabase) return fallbackArticles(limit);
+  if (!supabase) return combinedArticles(mockArticles, limit);
   let query = supabase.from("articles").select("*, alumni_profiles(name, graduation_year)").eq("published", true).order("created_at", { ascending: false });
   if (limit) query = query.limit(limit);
   const { data, error } = await query;
-  if (error) return fallbackArticles(limit);
-  return (data as unknown as ArticleRow[]).map(toArticle);
+  if (error) return combinedArticles(mockArticles, limit);
+  return combinedArticles((data as unknown as ArticleRow[]).map(toArticle), limit);
 }
 
 export async function getPublishedArticleById(id: string): Promise<Article | null> {
+  const curated = curatedArticles.find((item) => item.id === id);
+  if (curated) return curated;
   const supabase = getPublicClient();
   if (!supabase) return mockArticles.find((item) => item.id === id) ?? null;
   const { data, error } = await supabase.from("articles").select("*, alumni_profiles(name, graduation_year)").eq("id", id).eq("published", true).maybeSingle();
@@ -58,15 +61,17 @@ export async function getPublishedArticleById(id: string): Promise<Article | nul
 
 export async function getPublishedAlumni(limit?: number): Promise<Alumni[]> {
   const supabase = getPublicClient();
-  if (!supabase) return fallbackAlumni(limit);
+  if (!supabase) return combinedAlumni(mockAlumni, limit);
   let query = supabase.from("alumni_profiles").select("*").eq("published", true).order("graduation_year", { ascending: false });
   if (limit) query = query.limit(limit);
   const { data, error } = await query;
-  if (error) return fallbackAlumni(limit);
-  return (data as unknown as AlumniRow[]).map(toAlumni);
+  if (error) return combinedAlumni(mockAlumni, limit);
+  return combinedAlumni((data as unknown as AlumniRow[]).map(toAlumni), limit);
 }
 
 export async function getPublishedAlumniById(id: string): Promise<Alumni | null> {
+  const curated = curatedAlumni.find((item) => item.id === id);
+  if (curated) return curated;
   const supabase = getPublicClient();
   if (!supabase) return mockAlumni.find((item) => item.id === id) ?? null;
   const { data, error } = await supabase.from("alumni_profiles").select("*").eq("id", id).eq("published", true).maybeSingle();
@@ -74,8 +79,15 @@ export async function getPublishedAlumniById(id: string): Promise<Alumni | null>
   return data ? toAlumni(data as unknown as AlumniRow) : null;
 }
 
-function fallbackArticles(limit?: number) { return limit ? mockArticles.slice(0, limit) : mockArticles; }
-function fallbackAlumni(limit?: number) { return limit ? mockAlumni.slice(0, limit) : mockAlumni; }
+function combinedArticles(source: Article[], limit?: number) {
+  const result = [...curatedArticles, ...source.filter((article) => !curatedArticles.some((curated) => curated.title === article.title && curated.authorName === article.authorName))];
+  return limit ? result.slice(0, limit) : result;
+}
+
+function combinedAlumni(source: Alumni[], limit?: number) {
+  const result = [...curatedAlumni, ...source.filter((alumni) => !curatedAlumni.some((curated) => curated.name === alumni.name && curated.graduationYear === alumni.graduationYear && curated.university === alumni.university))];
+  return limit ? result.slice(0, limit) : result;
+}
 
 function toArticle(row: ArticleRow): Article {
   return {

@@ -1,0 +1,55 @@
+import type { Alumni, Article } from "@/lib/mock-data";
+
+export const curatedAlumni: Alumni[] = [
+  {
+    id: "jalex-2024-xjtlu",
+    name: "Jalex",
+    graduationYear: 2024,
+    className: "13B",
+    university: "西交利物浦大学",
+    college: "数学物理学院",
+    major: "应用数学",
+    city: "苏州",
+    country: "中国",
+    stage: "本科在读",
+    direction: "计划继续硕博",
+    tags: ["数学人", "英港新德留学", "中外合办本"],
+    intro: "西浦应数本科在读～",
+    gaokaoYear: 2024,
+    gaokaoProvince: "江苏",
+    gaokaoType: "物化生",
+    gaokaoScore: 612,
+    gaokaoRank: 9990,
+    showScore: true,
+    showRank: true,
+    admittedUniversity: "西交利物浦大学",
+    admittedMajor: "电子信息类",
+    studyAdvice: "",
+    examAdvice: "",
+    applicationAdvice: "",
+    majorAdvice: "",
+    messageToStudents: "选择＞努力",
+    contact: "微信：jalexjtlu",
+    showContact: true,
+  },
+];
+
+export const curatedArticles: Article[] = [
+  {
+    id: "jalex-system-test",
+    title: "系统测试",
+    excerpt: "系统测试哈～ 最想告诉学弟学妹：选择＞努力。如果重新回到高三，我从不后悔。",
+    category: "大学生活",
+    authorName: "Jalex",
+    graduationYear: 2024,
+    readTime: "1 分钟",
+    likeCount: 0,
+    favoriteCount: 0,
+    paragraphs: [
+      "系统测试哈～",
+      "最想告诉学弟学妹：选择＞努力",
+      "如果重新回到高三：我从不后悔",
+      "联系方式：微信 jalexjtlu",
+    ],
+  },
+];

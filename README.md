@@ -79,6 +79,24 @@ public/questionnaire-placeholder.png
 
 若文章摘要为空，系统会清理正文换行和多余空格，并使用正文前 100 字自动生成摘要。
 
+### 直接导入问卷星 Word 结果
+
+问卷星单份答卷导出的 `.docx` 可以通过命令直接解析并上传：
+
+```bash
+npm run import:docx -- "C:\Users\你的用户名\Downloads\问卷结果.docx"
+```
+
+命令会显示即将上传的枣友与文章信息，然后提示输入管理员密钥。上传成功后，网站首页、枣友页和文章页会自动更新；若该枣友已经存在，则自动跳过。
+
+仅检查解析结果、不上传：
+
+```bash
+npm run import:docx -- "C:\路径\问卷结果.docx" --dry-run
+```
+
+默认上传到正式站点。也可以使用 `IMPORT_BASE_URL`、`ADMIN_IMPORT_SECRET` 和 `IMPORT_OPERATOR` 环境变量覆盖站点、密钥和操作人。
+
 ## 导入安全
 
 - 浏览器仅解析 Excel 和展示预览。
