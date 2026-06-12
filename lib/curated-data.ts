@@ -2,6 +2,37 @@ import type { Alumni, Article } from "@/lib/mock-data";
 
 export const curatedAlumni: Alumni[] = [
   {
+    id: "maxerslover-2024-whu",
+    name: "maxerslover",
+    graduationYear: 2024,
+    className: "13班",
+    university: "武汉大学",
+    college: "弘毅学堂",
+    major: "微电子科学与技术",
+    city: "武汉",
+    country: "中国",
+    stage: "本科在读",
+    direction: "先进封装技术",
+    tags: ["微电子", "高中学习", "志愿填报", "大学专业", "科研竞赛"],
+    intro: "我是一个略显慵懒的猫。",
+    gaokaoYear: 2024,
+    gaokaoProvince: "湖南",
+    gaokaoType: "物化生",
+    gaokaoScore: 665,
+    gaokaoRank: 0,
+    showScore: true,
+    showRank: false,
+    admittedUniversity: "武汉大学",
+    admittedMajor: "弘毅学堂（理科试验班）",
+    studyAdvice: "",
+    examAdvice: "",
+    applicationAdvice: "",
+    majorAdvice: "",
+    messageToStudents: "公开高考信息：665+，物理类全省前 0.25%。",
+    contact: "全平台：maxerslover",
+    showContact: true,
+  },
+  {
     id: "jalex-2024-xjtlu",
     name: "Jalex",
     graduationYear: 2024,
@@ -97,6 +128,24 @@ export const curatedAlumni: Alumni[] = [
 ];
 
 export const curatedArticles: Article[] = [
+  {
+    id: "maxerslover-my-experience",
+    title: "我的经历",
+    excerpt: "我会伸出还温热的手掌，告诉他明天会有多晴朗。",
+    category: "高中学习",
+    authorName: "maxerslover",
+    authorId: "maxerslover-2024-whu",
+    graduationYear: 2024,
+    readTime: "1 分钟",
+    submittedAt: "2026/6/12 18:33",
+    likeCount: 0,
+    favoriteCount: 0,
+    paragraphs: [
+      "……",
+      "最想告诉学弟学妹：我会伸出还温热的手掌，告诉他明天会有多晴朗",
+      "如果重新回到高三：我想知道高考答案🙈",
+    ],
+  },
   {
     id: "jalex-system-test",
     title: "选择＞努力",
