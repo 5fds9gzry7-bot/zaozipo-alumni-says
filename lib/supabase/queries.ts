@@ -30,7 +30,7 @@ type ArticleRow = {
   summary: string;
   content: string;
   created_at: string;
-  alumni_profiles: { name: string; graduation_year: number } | null;
+  alumni_profiles: { id: string; name: string; graduation_year: number } | null;
 };
 
 function getPublicClient() {
@@ -44,7 +44,7 @@ function getPublicClient() {
 export async function getPublishedArticles(limit?: number): Promise<Article[]> {
   const supabase = getPublicClient();
   if (!supabase) return combinedArticles(mockArticles, limit);
-  let query = supabase.from("articles").select("*, alumni_profiles(name, graduation_year)").eq("published", true).order("created_at", { ascending: false });
+  let query = supabase.from("articles").select("*, alumni_profiles(id, name, graduation_year)").eq("published", true).order("created_at", { ascending: false });
   if (limit) query = query.limit(limit);
   const { data, error } = await query;
   if (error) return combinedArticles(mockArticles, limit);
@@ -56,7 +56,7 @@ export async function getPublishedArticleById(id: string): Promise<Article | nul
   if (curated) return curated;
   const supabase = getPublicClient();
   if (!supabase) return mockArticles.find((item) => item.id === id) ?? null;
-  const { data, error } = await supabase.from("articles").select("*, alumni_profiles(name, graduation_year)").eq("id", id).eq("published", true).maybeSingle();
+  const { data, error } = await supabase.from("articles").select("*, alumni_profiles(id, name, graduation_year)").eq("id", id).eq("published", true).maybeSingle();
   if (error) return mockArticles.find((item) => item.id === id) ?? null;
   return data ? toArticle(data as unknown as ArticleRow) : null;
 }
@@ -81,6 +81,12 @@ export async function getPublishedAlumniById(id: string): Promise<Alumni | null>
   return data ? toAlumni(data as unknown as AlumniRow) : null;
 }
 
+export async function getPublishedArticlesByAlumni(id: string): Promise<Article[]> {
+  const [person, articles] = await Promise.all([getPublishedAlumniById(id), getPublishedArticles()]);
+  if (!person) return [];
+  return articles.filter((article) => article.authorId === id || (!article.authorId && article.authorName === person.name && article.graduationYear === person.graduationYear));
+}
+
 function combinedArticles(source: Article[], limit?: number) {
   const result = [...curatedArticles, ...source.filter((article) => !curatedArticles.some((curated) => curated.title === article.title && curated.authorName === article.authorName))];
   return limit ? result.slice(0, limit) : result;
@@ -98,6 +104,7 @@ function toArticle(row: ArticleRow): Article {
     excerpt: row.summary,
     category: row.category,
     authorName: row.alumni_profiles?.name ?? "枣友",
+    authorId: row.alumni_profiles?.id,
     graduationYear: row.alumni_profiles?.graduation_year ?? new Date(row.created_at).getFullYear(),
     readTime: `${Math.max(1, Math.ceil(row.content.length / 500))} 分钟`,
     submittedAt: formatSubmittedAt(row.created_at),

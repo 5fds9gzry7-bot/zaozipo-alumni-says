@@ -4,6 +4,7 @@ export type Article = {
   excerpt: string;
   category: string;
   authorName: string;
+  authorId?: string;
   graduationYear: number;
   readTime: string;
   submittedAt?: string;
@@ -51,6 +52,7 @@ export const articles: Article[] = [
     excerpt: "大学不是高中的自然延长线。关于选择、节奏和独处，这是我走出枣子坡后最想补上的一课。",
     category: "大学成长",
     authorName: "周屿",
+    authorId: "zhou-yu",
     graduationYear: 2024,
     readTime: "6 分钟",
     likeCount: 86,
@@ -68,6 +70,7 @@ export const articles: Article[] = [
     excerpt: "从课程表、培养方案到真实工作日常，四个角度帮你拆开一个专业的漂亮名字。",
     category: "大学专业",
     authorName: "林知夏",
+    authorId: "lin-zhixia",
     graduationYear: 2023,
     readTime: "8 分钟",
     likeCount: 132,
@@ -84,6 +87,7 @@ export const articles: Article[] = [
     excerpt: "比起熬夜和题海，我更受益于稳定复盘、及时提问，以及给自己留下能呼吸的时间。",
     category: "高中学习",
     authorName: "蒋言",
+    authorId: "jiang-yan",
     graduationYear: 2022,
     readTime: "7 分钟",
     likeCount: 104,
@@ -100,6 +104,7 @@ export const articles: Article[] = [
     excerpt: "城市、学科、转专业空间和校园生活，都值得放进你的志愿选择表。",
     category: "志愿填报",
     authorName: "宋予安",
+    authorId: "song-yuan",
     graduationYear: 2021,
     readTime: "9 分钟",
     likeCount: 118,
@@ -116,6 +121,7 @@ export const articles: Article[] = [
     excerpt: "没人再每天检查进度后，我用课程地图和每周回顾重新建立了自己的节奏。",
     category: "大学成长",
     authorName: "陈砚秋",
+    authorId: "chen-yanqiu",
     graduationYear: 2020,
     readTime: "5 分钟",
     likeCount: 74,
