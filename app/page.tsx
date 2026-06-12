@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   description: "听学长学姐讲大学、专业、高考、留学与成长经验。",
 };
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function HomePage() {
   const [articles, alumni] = await Promise.all([getPublishedArticles(), getPublishedAlumni()]);
   const stats = [{ value: String(articles.length), label: "经验文章" }, { value: String(alumni.length), label: "枣友名片" }, { value: String(new Set(alumni.map((item) => item.university)).size), label: "覆盖大学" }];

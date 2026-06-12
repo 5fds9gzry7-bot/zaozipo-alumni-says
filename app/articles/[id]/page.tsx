@@ -5,6 +5,9 @@ import { PageHeader } from "@/components/PageHeader";
 import { Pill } from "@/components/Pill";
 import { getPublishedArticleById } from "@/lib/supabase/queries";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 type Props = { params: Promise<{ id: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -4,6 +4,9 @@ import { InfoRow } from "@/components/InfoRow";
 import { PageHeader } from "@/components/PageHeader";
 import { getPublishedAlumniById } from "@/lib/supabase/queries";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function AlumniDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const person = await getPublishedAlumniById(id);
