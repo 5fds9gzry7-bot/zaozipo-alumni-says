@@ -5,7 +5,7 @@ export const curatedAlumni: Alumni[] = [
     id: "jalex-2024-xjtlu",
     name: "Jalex",
     graduationYear: 2024,
-    className: "13B",
+    className: "13A",
     university: "西交利物浦大学",
     college: "数学物理学院",
     major: "应用数学",
