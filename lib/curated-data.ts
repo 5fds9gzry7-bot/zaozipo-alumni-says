@@ -28,7 +28,7 @@ export const curatedAlumni: Alumni[] = [
     examAdvice: "",
     applicationAdvice: "",
     majorAdvice: "",
-    messageToStudents: "公开高考信息：597+，湖南物理类全省前 4.9%。",
+    messageToStudents: "公开高考信息：600左右，湖南物理类全省前 4.9%。",
     contact: "QQ：3562502939",
     showContact: true,
   },
