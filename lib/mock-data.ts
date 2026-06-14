@@ -34,6 +34,7 @@ export type Alumni = {
   gaokaoRank: number;
   showScore: boolean;
   showRank: boolean;
+  gaokaoDisplay?: string;
   admittedUniversity: string;
   admittedMajor: string;
   studyAdvice: string;

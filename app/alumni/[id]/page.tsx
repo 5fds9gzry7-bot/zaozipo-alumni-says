@@ -21,6 +21,7 @@ export default async function AlumniDetailPage({ params }: { params: Promise<{ i
       <div className="mt-4 flex flex-wrap gap-2">{person.tags.map((tag) => <span key={tag} className="rounded-full bg-white/10 px-3 py-1.5 text-[10px] font-semibold">{tag}</span>)}</div>
     </section>
     <DetailSection title="当前去向" eyebrow="NOW"><InfoRow label="大学 / 机构" value={person.university} /><InfoRow label="学院" value={person.college} /><InfoRow label="专业" value={person.major} /><InfoRow label="阶段" value={person.stage} /><InfoRow label="研究 / 职业方向" value={person.direction} /><InfoRow label="所在地区" value={[person.city, person.country].filter(Boolean).join(" · ")} /></DetailSection>
+    {person.gaokaoDisplay && <DetailSection title="高考信息" eyebrow="GAOKAO"><InfoRow label="年份 / 地区" value={[person.gaokaoYear, person.gaokaoProvince].filter(Boolean).join(" · ")} /><InfoRow label="选科" value={person.gaokaoType} /><InfoRow label="模糊展示" value={person.gaokaoDisplay} /></DetailSection>}
     {person.messageToStudents && <DetailSection title="个人简介" eyebrow="PROFILE"><p className="font-serif text-sm leading-8 text-[#59463d]">{person.messageToStudents}</p></DetailSection>}
     {person.showContact && person.contact && <DetailSection title="公开联系方式" eyebrow="CONTACT"><InfoRow label="联系枣友" value={person.contact} /></DetailSection>}
     {articles.length > 0 && <DetailSection title={`${person.name} 的经验文章`} eyebrow="FIELD NOTES"><div className="space-y-4">{articles.map((article) => <ArticleCard key={article.id} article={article} />)}</div></DetailSection>}
